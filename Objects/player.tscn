@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://b0vx0htssiftg"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_uy6gs"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5dfla"]
+friction = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_8sj51"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fnfnr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_d0edy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjbv6"]
+albedo_color = Color(0.694118, 0, 0.14902, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_331hq"]
+albedo_color = Color(0.694118, 0, 0.14902, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fo85e"]
+size = Vector3(0.42, 1.1, 1)
+
+[node name="Player" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_5dfla")
+max_contacts_reported = 3
+contact_monitor = true
+script = ExtResource("1_uy6gs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, 0, 0, 0)
+
+[node name="Head" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1.16138, 0, 0, 0, 1.10514, 0.326318, 0, -0.284986, 1.26542, -0.00143909, 3.98207, -0.544185)
+mesh = SubResource("SphereMesh_8sj51")
+skeleton = NodePath("../..")
+
+[node name="Body" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.700573, 0, 0, 0, 2.03649, 0.206901, 0, -0.525157, 0.802334, -0.000959396, 2.72856, -0.129116)
+mesh = SubResource("BoxMesh_fnfnr")
+skeleton = NodePath("../..")
+
+[node name="RightSki" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.395486, 0, 0, 0, 0.274154, 0, 0, 0, 3.57203, 0.502744, 1.67667, 0)
+mesh = SubResource("BoxMesh_d0edy")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_jjbv6")
+
+[node name="LeftSki" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.395486, 0, 0, 0, 0.274154, 0, 0, 0, 3.57203, -0.517728, 1.67667, 0)
+mesh = SubResource("BoxMesh_d0edy")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_331hq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11752, 0)
+shape = SubResource("BoxShape3D_fo85e")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, -0.000234269, 0.000958117, -0.000179973, 0.911739, 0.410769, -0.000969784, -0.410769, 0.911739, 0, 1.88847, 1.83782)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

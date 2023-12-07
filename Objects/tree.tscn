@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bth7iew0f1c6w"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eks4s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fcgpn"]
+albedo_color = Color(0.407843, 0.196078, 0.0627451, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_q6oxm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpejt"]
+albedo_color = Color(0.207843, 0.619608, 0.254902, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x1a57"]
+height = 4.52
+radius = 0.41
+
+[node name="Tree" type="StaticBody3D" groups=["Trees"]]
+
+[node name="Trunk" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.5614, 0, 0, 0, 1, 0.00208068, 1.62587, -0.00358963)
+mesh = SubResource("CylinderMesh_eks4s")
+surface_material_override/0 = SubResource("StandardMaterial3D_fcgpn")
+
+[node name="Leafs1" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.85298, 0, 0, 0, 1.66641, 0, 0, 0, 2.19155, 0, 2.85623, 0)
+mesh = SubResource("SphereMesh_q6oxm")
+surface_material_override/0 = SubResource("StandardMaterial3D_fpejt")
+
+[node name="Leafs2" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.11019, 0, 0, 0, 1.43111, 0, 0, 0, 1.83106, 0, 3.61263, 0)
+mesh = SubResource("SphereMesh_q6oxm")
+surface_material_override/0 = SubResource("StandardMaterial3D_fpejt")
+
+[node name="Leafs3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.38722, 0, 0, 0, 0.982511, 0, 0, 0, 0.989554, 0, 4.25278, 0)
+mesh = SubResource("SphereMesh_q6oxm")
+surface_material_override/0 = SubResource("StandardMaterial3D_fpejt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.23133, 0)
+shape = SubResource("CylinderShape3D_x1a57")

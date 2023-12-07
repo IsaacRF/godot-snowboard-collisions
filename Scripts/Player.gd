@@ -10,3 +10,8 @@ func _physics_process(delta):
 		linear_velocity.x = move_speed
 	else:
 		linear_velocity.x = 0
+
+
+func _on_body_entered(body):
+	if body.is_in_group("Trees"):
+		get_tree().reload_current_scene()
